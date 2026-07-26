@@ -22,6 +22,7 @@ def view():
     data=load_data()
     return data
 
+#path parameters
 @app.get('/patients/{patients_id}')
 def patients(patients_id:str = Path(...,description="id of the patients in the DB",example="P001")):
     data=load_data()
@@ -29,6 +30,7 @@ def patients(patients_id:str = Path(...,description="id of the patients in the D
         return data[patients_id]
     raise HTTPException(status_code=404,detail='patient not found in data base')
 
+#Query parameters
 @app.get('/sort')
 def sort_patients(sort_by:str = Query(...,description='sort in the basis of height, weight or bmi'), order:str = Query('acending',description='sort acending ort decending order')):
     valid_fields=['weight','height','bmi']
